@@ -46,12 +46,24 @@ export default function Table() {
   ], [])
   const columns = useMemo<Column<Data>[]>(() => [
     {
-      Header: 'Column 1',
+      Header: '',
       accessor: 'preview'
     },
     {
+      Header: 'Column 1',
+      accessor: 'col1',
+      width: 320,
+      Cell: (row) => {
+        return <div style={{ textAlign: 'right' }}>{row.value}</div>
+      }
+    },
+    {
       Header: 'Column 2',
-      accessor: 'col2'
+      accessor: 'col2',
+      width: 320,
+      Cell: (row) => {
+        return <div style={{ textAlign: 'center' }}>{row.value}</div>
+      }
     },
     {
       Header: 'Ações',

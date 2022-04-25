@@ -2,30 +2,7 @@ import styled from "styled-components";
 import { transparentize } from "polished";
 import { Line } from "react-chartjs-2";
 import Heading from "../Typography/Heading";
-
-const data = {
-  labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-  datasets: [
-    {
-      label: 'Receitas',
-      data: [500, 400, 600, 100, 800, 20],
-      fill: true,
-      backgroundColor: '#0099ff',
-      borderColor: '#0099ff',
-      borderWidth: 0.5,
-      yAxisID: 'cashflow',
-    },
-    {
-      label: 'Despesas',
-      data: [100, 200, 250, 500, 1000, 600],
-      fill: true,
-      backgroundColor: '#274060',
-      borderColor: '#274060',
-      borderWidth: 0.5,
-      yAxisID: 'cashflow',
-    },
-  ],
-};
+import NoData from "../NoData/NoData";
 
 const options: Chart.ChartOptions = {
   maintainAspectRatio: true,
@@ -62,22 +39,30 @@ const options: Chart.ChartOptions = {
   },
 };
 
-export type ChartProps = {}
+export type ChartProps = {
+  title: string,
+  data: Chart.ChartData
+}
 
-export default function Chart() {
+export default function Chart({ title, data }: ChartProps) {
   return (
     <ChartWrapper style={{ width: 640 }}>
       <div style={{ marginBottom: 16 }}>
         <Heading level={3}>
-          {'Média de performance nos últimos 12 meses'}
+          {title}
         </Heading>
       </div>
-      <Line
-        height={139}
-        width={600}
-        data={data}
-        options={options}
-        type="line" />
+      {
+        data ? (
+          <Line
+            height={139}
+            width={600}
+            data={data}
+            options={options}
+            type="line" />
+        ) :
+        <NoData />
+      }
     </ChartWrapper>
   )
 }

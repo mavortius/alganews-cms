@@ -9,6 +9,4 @@ export default {
 const Template: ComponentStory<typeof Chart> = (args) => <Chart {...args} />;
 
 export const Default = Template.bind({})
-Default.args = {
-  title: 'Post não encontrado'
-}
+Default.args = {}
